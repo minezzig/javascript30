@@ -4,44 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css">
     <title>Drum Kit</title>
   </head>
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-size: 24px;
-    }
-    .container {
-      background-color: grey;
-      height: 100vh;
-      width: 100vw;
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-    }
-    .keys {
-      width: 80%;
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-    .key {
-      border: 3px solid black;
-      padding: 15px 25px;
-      transition: all 0.1s ease-in-out;
-      cursor: pointer;
-      margin: 5px;
-    }
-    .playing {
-      transform: scale(1.25);
-      border: 3px solid yellow;
-    }
-  </style>
   <body>
     <div class="container">
       <div class="keys">
@@ -111,27 +76,6 @@
       data-key="76"
       src="http://commondatastorage.googleapis.com/codeskulptor-demos/pyman_assets/eatedible.ogg"
     ></audio>
-    <script>
-      function playSound(e) {
-        const audio = document.querySelector(`audio[data-key="${e.keyCode}"]`);
-        const key = document.querySelector(`.key[data-key="${e.keyCode}"]`);
-        if (!audio) return;
-        audio.currentTime = 0;
-        audio.play();
-        key.classList.add("playing");
-      }
-
-      function removeTransition(e) {
-        if (e.propertyName !== "transform") return;
-        this.classList.remove("playing");
-      }
-
-      window.addEventListener("keydown", playSound);
-
-      const keys = document.querySelectorAll(".key");
-      keys.forEach((key) =>
-        key.addEventListener("transitionend", removeTransition)
-      );
-    </script>
+    <script src="script.js"></script>
   </body>
 </html>
