@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Analog clock</title>
+    <style>
+      html {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background: linear-gradient(to left, lightblue, rgb(57, 163, 199));
+        text-align: center;
+        font-size: 10px;
+      }
+      body {
+        font-size: 2rem;
+        display: flex;
+        flex: 1;
+        height: 100vh;
+        align-items: center;
+      }
+      .clock {
+        width: 30rem;
+        height: 30rem;
+        border: 20px solid white;
+        border-radius: 50%;
+        margin: 50px auto;
+        position: relative;
+        padding: 2rem;
+      }
+      .clock-face {
+        position: relative;
+        width: 100%;
+        height: 100%;
+      }
+
+      .hand {
+        width: 50%;
+        height: 6px;
+        background: black;
+        position: absolute;
+        top: 50%;
+        transform-origin: 100%;
+        transform: rotate(90deg);
+        transition: all 0.05s;
+        transition-timing-function: cubic-bezier(0.18, 0, 0, 2.16);
+      }
+      .hours-hand {
+        width: 35%;
+        right: 50%;
+      }
+      .seconds-hand {
+        height: 1px;
+        background-color: blue;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="clock">
+      <div class="clock-face">
+        <div class="hand hours-hand"></div>
+        <div class="hand minutes-hand"></div>
+        <div class="hand seconds-hand"></div>
+      </div>
+    </div>
+
+    <script>
+      const secondsHand = document.querySelector(".seconds-hand");
+      const minutesHand = document.querySelector(".minutes-hand");
+      const hoursHand = document.querySelector(".hours-hand");
+
+      function setTime() {
+        const time = new Date();
+        const seconds = time.getSeconds();
+        const minutes = time.getMinutes();
+        const hours = time.getHours();
+
+        const secondsDeg = (seconds / 60) * 360 + 90;
+        const minutesDeg = (minutes / 60) * 360 + 90;
+        const hoursDeg = (hours / 12) * 360 + 90;
+
+        secondsHand.style.transform = `rotate(${secondsDeg}deg)`;
+        minutesHand.style.transform = `rotate(${minutesDeg}deg)`;
+        hoursHand.style.transform = `rotate(${hoursDeg}deg)`;
+      }
+      setInterval(setTime, 1000);
+    </script>
+  </body>
+</html>
